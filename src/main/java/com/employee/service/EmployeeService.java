@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.employee.dto.request.EmployeeRequest;
+import com.employee.dto.response.EmployeeRatingResponse;
 import com.employee.dto.response.EmployeeResponse;
 import com.employee.model.Department;
 import com.employee.model.Employee;
@@ -43,5 +44,20 @@ public class EmployeeService {
                 employee.getDepartment().getDeptName(),
                 employee.getRoles().stream().map(Role::getRoleName).toList(),
                 employee.getJoiningDate());
+    }
+
+    public List<EmployeeRatingResponse> filterEmployees(
+            String department,
+            Double minRating) {
+
+        List<Object[]> results = employeeRepo.findEmployeesByDepartmentAndMinRating(department, minRating);
+
+        return results.stream()
+                .map(row -> new EmployeeRatingResponse(
+                        ((Number) row[0]).longValue(),
+                        (String) row[1],
+                        (String) row[2],
+                        ((Number) row[3]).doubleValue()))
+                .toList();
     }
 }
