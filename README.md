@@ -2,15 +2,6 @@
 
 A Spring Boot REST API to manage employees, submit performance reviews, and generate review-cycle summaries.
 
-## Tech Stack
-
-- Java 17
-- Spring Boot
-- Spring Data JPA (Hibernate)
-- PostgreSQL
-- Maven (wrapper included)
-- Lombok
-
 ## Prerequisites
 
 - JDK 17
@@ -26,45 +17,8 @@ CREATE DATABASE employee_db;
 
 Set environment variables before running the app:
 
-```bash
-# Linux/macOS
-export DB_NAME=employee_db
-export DB_USERNAME=postgres
-export DB_PASSWORD=postgres
-```
-
-```powershell
-# Windows PowerShell
-$env:DB_NAME = "employee_db"
-$env:DB_USERNAME = "postgres"
-$env:DB_PASSWORD = "postgres"
-```
 
 Default server port is `8080`.
-
-## Run and Test
-
-From the project root:
-
-```bash
-# Linux/macOS
-./mvnw clean package
-./mvnw test
-./mvnw spring-boot:run
-```
-
-```powershell
-# Windows
-.\mvnw.cmd clean package
-.\mvnw.cmd test
-.\mvnw.cmd spring-boot:run
-```
-
-Application base URL:
-
-```text
-http://localhost:8080
-```
 
 ## API Endpoints
 
@@ -112,8 +66,7 @@ Request body:
 Example:
 
 ```http
-GET /employees/2/reviews HTTP/1.1
-Host: localhost:8080
+GET /employees/2/reviews 
 ```
 
 ### 4) Get Review Cycle Summary
@@ -147,8 +100,7 @@ Example response:
 Example:
 
 ```http
-GET /employees?department=Engineering&minRating=1 HTTP/1.1
-Host: localhost:8080
+GET /employees?department=Engineering&minRating=1
 ```
 
 ## Notes
