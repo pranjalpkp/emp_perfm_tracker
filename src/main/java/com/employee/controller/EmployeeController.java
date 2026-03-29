@@ -40,6 +40,9 @@ public class EmployeeController {
             @PathVariable Long id) {
 
         List<PerformanceReviewResponse> reviews = performanceReviewService.getEmployeeReviews(id);
+        if (reviews.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
 
         return ResponseEntity.ok(reviews);
     }

@@ -38,9 +38,9 @@ public class PerformanceReviewService {
         if (reviewRequest.rating() < 1 || reviewRequest.rating() > 5) {
             throw new RuntimeException("Rating must be between 1 and 5");
         }
-        if (employee.getEmpId().equals(reviewRequest.empId())) {
-            throw new RuntimeException("Employee cannot review themselves");
-        }
+        // if (employee.getEmpId().equals(reviewRequest.empId())) {
+        //     throw new RuntimeException("Employee cannot review themselves");
+        // }
         // multiple reviews in same cycle for same employee should not be allowed
         List<PerformanceReview> existingReviews = performanceReviewRepository.findByEmployeeEmpId(employee.getEmpId());
         boolean alreadyReviewed = existingReviews.stream()

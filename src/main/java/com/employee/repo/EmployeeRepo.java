@@ -13,13 +13,13 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
             e.emp_id,
             e.emp_name,
             d.dept_name,
-            AVG(r.rating) as avg_rating
+            ROUND(AVG(r.rating)::numeric, 2) as avg_rating
             FROM employees_tbl e
             JOIN departments_tbl d ON e.dept_id = d.dept_id
             JOIN performance_reviews_tbl r ON r.emp_id = e.emp_id
-            WHERE d.dept_name = :department
+            WHERE LOWER(d.dept_name) = LOWER(:department)
             GROUP BY e.emp_id, e.emp_name, d.dept_name
-            HAVING AVG(r.rating) >= :minRating
+            HAVING ROUND(AVG(r.rating)::numeric, 2) >= :minRating
             """, nativeQuery = true)
     List<Object[]> findEmployeesByDepartmentAndMinRating(
             String department,
